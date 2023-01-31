@@ -92,3 +92,7 @@ These are roles for members the project that should be assigned or at least shar
 - Project/Group Time with support 
 - Back to main room for wind down (~15m)
 
+
+Mongo DB connection 
+
+mongodb+srv://midyear_mern_team3:8rWbA6hmXbbNbls3@sandbox-hs-01-pl-0.efruc.mongodb.net/my_mern_team3
