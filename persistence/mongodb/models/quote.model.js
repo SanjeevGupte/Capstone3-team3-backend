@@ -44,6 +44,10 @@ const quoteSchema = new mongoose.Schema({
         required: true,
         minlength: 5
     },
+    Premium: {
+        type: Number,
+        requried: true
+    }
 })
 
 // quoteSchema.pre('save', function (next) {
