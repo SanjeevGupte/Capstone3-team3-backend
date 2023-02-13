@@ -8,6 +8,7 @@ const auth = require("./auth");
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth.routes');
 const usersRouter = require('./routes/user.routes');
+const quotesRouter = require('./routes/quote.routes');
 const swaggerDocsRouter = require("./routes/swagger.routes");
 
 const app = express();
@@ -26,6 +27,9 @@ app.use('/auth', authRouter);
 
 //tell our app to use our user routes and prefix them with /api
 app.use('/api/users', usersRouter);
+
+//tell our app to use our quote routes and prefix them with /api
+app.use('/api/quotes', quotesRouter);
 
 //custom error handling
 app.use((err, req, res, next) => {
