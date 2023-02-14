@@ -6,7 +6,7 @@ const quoteController = {
 
     //method to get all quotes using async/await syntax
     getQuotes: async function(req, res){
-
+        console.log (" In get Quotes")
         //create base query
         let query = {}
 
@@ -28,7 +28,7 @@ const quoteController = {
             //use our model to find quotes that match a query.
             //{} is the current query which really mean find all the quotes
             //we use await here since this is an async process and we want the code to wait for this to finish before moving on to the next line of code
-            let allquotes = await Quote.find(query)
+            let allQuotes = await Quote.find(query)
             
             //return all the quotes that we found in JSON format
             res.json(allQuotes)
