@@ -19,9 +19,6 @@ const quoteSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
-        index: {
-            unique: true
-        },
         match: [/.+\@.+\..+/, "Invalid E-mail Address"],
     },
     Address: {
