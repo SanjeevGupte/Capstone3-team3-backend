@@ -109,7 +109,6 @@ const agentController = {
 
             //get the state of the agent from the url parameters
             const agentState = req.params.state;
-            
             //use our model to find the agent that match a query.
             //{email: some@email.com} is the current query which really mean find the agent with that email
             //we use await here since this is an async process and we want the code to wait for this to finish before moving on to the next line of code
