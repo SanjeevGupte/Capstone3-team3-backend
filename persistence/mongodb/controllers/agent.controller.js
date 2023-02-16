@@ -112,7 +112,8 @@ const agentController = {
             //use our model to find the agent that match a query.
             //{email: some@email.com} is the current query which really mean find the agent with that email
             //we use await here since this is an async process and we want the code to wait for this to finish before moving on to the next line of code
-            let foundAgent = await Agent.findOne({state: agentState})
+            
+            let foundAgent = await Agent.find({state: agentState})
 
             //if we found the agent, return that agent otherwise return a 404
             if(foundAgent){
