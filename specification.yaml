@@ -7,6 +7,115 @@ servers:
     description: localhost
 components:
   schemas:
+    Quotes:
+      additionalProperties: false
+      type: object
+      properties:
+        firstName:
+          type: string
+          minLength: 2
+        lastName:
+          type: string
+          minLength: 2
+        email:
+          type: string
+        Address:
+          type: string
+          minLength: 5
+        Age:
+          type: number
+          min: 18
+          max: 65
+        LOB:
+          type: string
+          minLength: 3
+        VIN:
+          type: string
+          minLength: 3
+        Premium:
+          type: number          
+      required:
+        - firstName
+        - lastName
+        - email
+        - Address
+        - Age
+        - LOB
+        - VIN
+        - Premium
+    QuoteResponse:
+      additionalProperties: false
+      type: object
+      properties:
+        _id:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        Address:
+          type: string
+        Age:
+          type: number
+        LOB:
+          type: string
+        VIN:
+          type: string
+        Premium:
+          type: number
+    Agents:
+      additionalProperties: false
+      type: object
+      properties:
+        firstName:
+          type: string
+          minLength: 2
+        lastName:
+          type: string
+          minLength: 2
+        Title:
+          type: string
+        email:
+          type: string
+          minLength: 5
+        state:
+          type: string
+          minLength: 2
+          maxLength: 2
+        phoneNumber:
+          type: string
+          minLength: 10
+        profileImage:
+          data: Buffer
+          contentType: string
+      required:
+        - firstName
+        - lastName
+        - Title
+        - email
+        - state
+        - phoneNumber
+        - profileImage
+    AgentResponse:
+      additionalProperties: false
+      type: object
+      properties:
+        _id:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        Title:
+          type: string
+        email:
+          type: string
+        state:
+          type: number
+        phoneNumber:
+          type: string
     User:
       additionalProperties: false
       type: object
@@ -251,3 +360,171 @@ paths:
           $ref: '#/components/responses/401'
         '404':
           $ref: '#/components/responses/404'
+  /api/quotes:
+    get:
+      summary: Get a list of quotes
+      tags:
+        - Quotes
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: email
+          in: query
+          description: Get quotes with a specific email (fuzzy, case insensitve)
+          required: false
+          schema:
+            email:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      quotes:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/QuoteResponse'
+        '400':
+          $ref: '#/components/responses/400'
+    post:
+      summary: Create a new quote
+      operationId: createQuote
+      x-controller: quotes
+      tags:
+        - Quotes
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Quotes'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      quote:
+                        $ref: '#/components/schemas/QuoteResponse'
+        '400':
+          $ref: '#/components/responses/400'
+  /api/quotes{email}:
+    put:
+      summary: Update quote
+      tags:
+        - Quotes
+      parameters:
+        - in: path
+          name: email
+          required: true
+          schema:
+            type: string
+            description: The email address of the user
+      security:
+        - bearerAuth: []
+      requestBody:
+        description: The quote updates
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Quotes'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuoteResponse'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+  /api/agents/{email}:
+    get:
+      summary: Get a list of agents
+      tags:
+        - Agents
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: email
+          in: query
+          description: Get agent with a specific email (fuzzy, case insensitve)
+          required: false
+          schema:
+            email:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      quotes:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/AgentResponse'
+        '400':
+          $ref: '#/components/responses/400'
+  /api/agents:
+    get:
+      summary: Get a list of all agents
+      tags:
+        - Agents
+      security:
+        - bearerAuth: []
+      parameters:
+        - none
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      quotes:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/AgentResponse'
+        '400':
+          $ref: '#/components/responses/400'
+    post:
+      summary: Create a new Agent
+      operationId: createAgent
+      x-controller: agents
+      tags:
+        - Agents
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Agents'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - type: object
+                    properties:
+                      agent:
+                        $ref: '#/components/schemas/AgentResponse'
+        '400':
+          $ref: '#/components/responses/400'
