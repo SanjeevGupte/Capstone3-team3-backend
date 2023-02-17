@@ -1,4 +1,4 @@
-openapi: 3.0.1
+openapi: 3.0.18080
 info:
   title: Capstone BE Starter
   version: 1.0.0
@@ -449,17 +449,17 @@ paths:
           $ref: '#/components/responses/401'
         '404':
           $ref: '#/components/responses/404'
-  /api/agents/{email}:
+  /api/agents/{state}:
     get:
-      summary: Get a list of agents
+      summary: Get a list of agents in a state
       tags:
         - Agents
       security:
         - bearerAuth: []
       parameters:
-        - name: email
+        - name: state
           in: query
-          description: Get agent with a specific email (fuzzy, case insensitve)
+          description: Get agent with a specific state
           required: false
           schema:
             email:
