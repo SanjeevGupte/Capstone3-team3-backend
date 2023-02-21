@@ -26,6 +26,21 @@ const quoteSchema = new mongoose.Schema({
         required: true,
         minlength: 5
     },
+    City: {
+        type: String,
+        required: true,
+        minlength: 2
+    },
+    State: {
+        type: String,
+        required: true,
+        minlength: 2
+    },
+    Zipcode: {
+        type: String,
+        required: true,
+        minlength: 3
+    },
     Age: {
         type: Number,
         min: 18, 
@@ -35,11 +50,6 @@ const quoteSchema = new mongoose.Schema({
         type: String,
         required: true,
         minlength: 3
-    },
-    VIN: {
-        type: String,
-        required: true,
-        minlength: 5
     },
     Premium: {
         type: Number,
