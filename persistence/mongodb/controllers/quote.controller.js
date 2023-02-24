@@ -113,7 +113,7 @@ const quoteController = {
             //use our model to find the quote that match a query.
             //{email: some@email.com} is the current query which really mean find the quote with that email
             //we use await here since this is an async process and we want the code to wait for this to finish before moving on to the next line of code
-            let foundQuote = await Quote.findOne({email: quoteEmail})
+            let foundQuote = await Quote.find({email: quoteEmail})
 
             //if we found the quote, return that quote otherwise return a 404
             if(foundQuote){

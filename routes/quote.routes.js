@@ -13,10 +13,10 @@ const quoteController = require(
 router.post("/", quoteController.createQuote)
 
 //get route to return all quotes (requires auth)
-router.get("/", validateJwtMiddleware, quoteController.getQuotes)
+router.get("/",  quoteController.getQuotes)
 
 //get route to return a specific users (requires auth)
-router.get("/:email", validateJwtMiddleware, quoteController.getQuote)
+router.get("/:email",  quoteController.getQuote)
 
 //put route to update a quote (requires auth)
 router.put("/:email", validateJwtMiddleware, quoteController.updateQuote)
